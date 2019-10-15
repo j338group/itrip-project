@@ -12,11 +12,6 @@
     <groupId>cn.itrip</groupId>
     <artifactId>itrip-beans</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-    </dependencies>
+
 
 </project>
