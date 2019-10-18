@@ -17,6 +17,7 @@
         <module>itrip-trade</module>
         <module>itrip-biz</module>
         <module>demoFreeMarker</module>
+        <module>demo</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -10,5 +10,6 @@ public class Constants {
     //默认页大小
     public static final Integer DEFAULT_PAGE_SIZE = 10;
 
-
+    //手机注册验证码前缀
+    public static final String POHONE_SMS_ACTIVE_PREFIX="activation:";
 }
