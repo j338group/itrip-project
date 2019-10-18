@@ -1,9 +1,8 @@
 package cn.itrip.service.itripOrderLinkUser;
-import cn.itrip.pojo.ItripOrderLinkUser;
+import cn.itrip.beans.pojo.ItripOrderLinkUser;
 import java.util.List;
 import java.util.Map;
-import java.util.List;
-import java.util.Map;
+
 import cn.itrip.common.Page;
 /**
 * Created by shang-pc on 2015/11/7.

@@ -26,8 +26,12 @@
         <mybatis.version>3.4.5</mybatis.version>
         <mybatis-spring.version>2.0.2</mybatis-spring.version>
         <mysql.version>5.1.38</mysql.version>
-        <log4j.version>2.11.1</log4j.version>
+        <log4j2.version>2.11.1</log4j2.version>
+        <log4j.version>1.2.17</log4j.version>
         <swagger.version>2.4.0</swagger.version>
+        <c3p0.version>0.9.1.2</c3p0.version>
+        <jedis.version>2.1.0</jedis.version>
+        <fastjson.version>1.2.58</fastjson.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -54,6 +58,11 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
                 <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
             </dependency>
@@ -75,6 +84,11 @@
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-core</artifactId>
+                <version>${log4j2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
             <dependency>
@@ -91,6 +105,21 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>c3p0</groupId>
+                <artifactId>c3p0</artifactId>
+                <version>${c3p0.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
         </dependencies>
 
