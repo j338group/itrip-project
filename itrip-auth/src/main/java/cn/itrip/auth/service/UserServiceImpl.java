@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     public void itriptxCreateUser(ItripUser user) throws Exception {
         //把user写入mysql数据库
         user.setActivated(0);
-//        user.setCreationDate(new Date());
+        user.setCreationDate(new Date());
         user.setUserType(0);
         user.setUserPassword(MD5.getMd5(user.getUserPassword(),32));
         itripUserMapper.insertItripUser(user);
@@ -93,5 +93,26 @@ public class UserServiceImpl implements UserService {
         //激活失败，删除用户记录
         itripUserMapper.deleteItripUserById(user.getId());
         return false;
+    }
+
+    /**
+     * 登录验证
+     * @param userCode
+     * @param userPassword
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public ItripUser login(String userCode, String userPassword) throws Exception {
+        ItripUser user = this.getItripUserByUserCode(userCode);
+        if (user != null && user.getUserPassword().equals(MD5.getMd5(userPassword, 32))) {
+            if (user.getActivated() != 1) {
+                throw new Exception("用户未激活");
+            } else {
+                return user;
+            }
+
+        }
+        return null;
     }
 }

@@ -12,4 +12,7 @@ public interface UserService {
     ItripUser getItripUserByUserCode(String userCode) throws Exception;
 
     Boolean validatePhone(String userCode, String smsCode) throws Exception;
+
+    ItripUser login(String userCode, String userPassword)throws Exception;
+
 }
