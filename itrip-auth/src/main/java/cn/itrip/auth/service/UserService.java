@@ -15,4 +15,7 @@ public interface UserService {
 
     ItripUser login(String userCode, String userPassword)throws Exception;
 
+    void vendorCreateUser(ItripUser user) throws Exception;
+
+    void updateUser(ItripUser user) throws Exception;
 }

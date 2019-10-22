@@ -37,11 +37,9 @@ public class ItripWechatTokenVO extends ItripTokenVO {
 	}
 	public ItripWechatTokenVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public ItripWechatTokenVO(String token, long expTime, long genTime) {
 		super(token, expTime, genTime);
-		// TODO Auto-generated constructor stub
 	}
 	
 	

@@ -148,7 +148,7 @@
         </trim>
     </select>
 
-    <insert id="insertItripUser" parameterType="cn.itrip.beans.pojo.ItripUser">
+    <insert id="insertItripUser" parameterType="cn.itrip.beans.pojo.ItripUser" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into itrip_user(
                         userCode,
                         userPassword,
@@ -214,7 +214,7 @@
                     <if test="baidu != null and baidu!=''">
                         baidu=#{baidu},
                     </if>
-                    <if test="creationDate != null and creationDate!=''">
+                    <if test="creationDate != null">
                         creationDate=#{creationDate},
                     </if>
                     <if test="createdBy != null and createdBy!=''">

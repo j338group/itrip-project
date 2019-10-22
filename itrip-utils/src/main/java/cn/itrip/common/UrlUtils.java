@@ -1,9 +1,6 @@
 package cn.itrip.common;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -33,8 +30,8 @@ public class UrlUtils {
 		    return null;
 		}
 	}
-	private static String ConvertToString(InputStream inputStream){  
-	    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);  
+	private static String ConvertToString(InputStream inputStream) throws UnsupportedEncodingException {
+	    InputStreamReader inputStreamReader = new InputStreamReader(inputStream,"UTF-8");
 	    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);  
 	    StringBuilder result = new StringBuilder();  
 	    String line = null;  

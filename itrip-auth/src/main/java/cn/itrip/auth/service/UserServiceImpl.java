@@ -115,4 +115,19 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    /**
+     * 第三方登录创建用户
+     * @param user
+     * @throws Exception
+     */
+    @Override
+    public void vendorCreateUser(ItripUser user) throws Exception {
+        itripUserMapper.insertItripUser(user);
+    }
+
+    @Override
+    public void updateUser(ItripUser user) throws Exception {
+        itripUserMapper.updateItripUser(user);
+    }
 }
