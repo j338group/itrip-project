@@ -23,7 +23,7 @@ public class SearchHotelRoomVO implements Serializable{
     private Integer isTimelyResponse;
     @ApiModelProperty("[非必填] 床型ID")
     private Long roomBedTypeId;
-    @ApiModelProperty("[必填] 入职日期")
+    @ApiModelProperty("[必填] 入住日期")
     private Date startDate;
     @ApiModelProperty("[必填] 退房日期")
     private Date endDate;

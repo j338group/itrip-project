@@ -1,13 +1,16 @@
 package cn.itrip.service.itripHotelRoom;
+import cn.itrip.beans.vo.hotelroom.ItripHotelRoomVO;
+import cn.itrip.beans.vo.hotelroom.SearchHotelRoomVO;
+import cn.itrip.common.DateUtil;
 import cn.itrip.mapper.itripHotelRoom.ItripHotelRoomMapper;
 import cn.itrip.beans.pojo.ItripHotelRoom;
 import cn.itrip.common.EmptyUtils;
 import cn.itrip.common.Page;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 import cn.itrip.common.Constants;
 @Service
 public class ItripHotelRoomServiceImpl implements ItripHotelRoomService {
@@ -51,6 +54,34 @@ public class ItripHotelRoomServiceImpl implements ItripHotelRoomService {
         List<ItripHotelRoom> itripHotelRoomList = itripHotelRoomMapper.getItripHotelRoomListByMap(param);
         page.setRows(itripHotelRoomList);
         return page;
+    }
+
+    @Override
+    public List<ItripHotelRoomVO> getItripHotelRoomListBySearchRoomVO(SearchHotelRoomVO roomVO) throws Exception {
+        //封装查询条件
+        Map<String, Object> param = new HashMap<>();
+        param.put("hotelId", roomVO.getHotelId());
+        param.put("startDate", "");
+        param.put("endDate", "");
+        param.put("isBook", roomVO.getIsBook());
+        param.put("isHavingBreakfast", roomVO.getIsHavingBreakfast());
+        param.put("isTimelyResponse", roomVO.getIsTimelyResponse());
+        param.put("roomBedTypeId", roomVO.getRoomBedTypeId());
+        param.put("isCancel", roomVO.getIsCancel());
+        param.put("payType", roomVO.getPayType());
+
+        List<Date> dateList = DateUtil.getBetweenDates(roomVO.getStartDate(), roomVO.getEndDate());
+
+        param.put("dateList",dateList);
+
+        List<ItripHotelRoom> roomList = itripHotelRoomMapper.getItripHotelRoomListByMap(param);
+        List<ItripHotelRoomVO> roomVOList = new ArrayList<>();
+        for (ItripHotelRoom room : roomList) {
+            ItripHotelRoomVO roomVO1 = new ItripHotelRoomVO();
+            BeanUtils.copyProperties(room, roomVO1);
+            roomVOList.add(roomVO1);
+        }
+        return roomVOList;
     }
 
 }

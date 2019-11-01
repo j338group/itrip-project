@@ -3,6 +3,8 @@ import cn.itrip.beans.pojo.ItripHotelRoom;
 import java.util.List;
 import java.util.Map;
 
+import cn.itrip.beans.vo.hotelroom.ItripHotelRoomVO;
+import cn.itrip.beans.vo.hotelroom.SearchHotelRoomVO;
 import cn.itrip.common.Page;
 /**
 * Created by shang-pc on 2015/11/7.
@@ -22,4 +24,12 @@ public interface ItripHotelRoomService {
     public Integer itriptxDeleteItripHotelRoomById(Long id)throws Exception;
 
     public Page<ItripHotelRoom> queryItripHotelRoomPageByMap(Map<String,Object> param,Integer pageNo,Integer pageSize)throws Exception;
+
+    /**
+     * 根据搜索条件查询房型列表
+     * @param roomVO
+     * @return
+     * @throws Exception
+     */
+    List<ItripHotelRoomVO> getItripHotelRoomListBySearchRoomVO(SearchHotelRoomVO roomVO) throws Exception;
 }
