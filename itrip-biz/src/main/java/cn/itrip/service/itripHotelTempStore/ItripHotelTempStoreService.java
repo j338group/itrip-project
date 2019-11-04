@@ -22,4 +22,12 @@ public interface ItripHotelTempStoreService {
     public Integer itriptxDeleteItripHotelTempStoreById(Long id)throws Exception;
 
     public Page<ItripHotelTempStore> queryItripHotelTempStorePageByMap(Map<String,Object> param,Integer pageNo,Integer pageSize)throws Exception;
+
+    /**
+     * 获取指定房型，指定日期的剩余库存
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    List<ItripHotelTempStore> getItripHotelTempStoresByMap(Map<String, Object> param) throws Exception;
 }

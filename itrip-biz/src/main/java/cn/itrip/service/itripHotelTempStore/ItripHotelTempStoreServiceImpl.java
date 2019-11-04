@@ -53,4 +53,19 @@ public class ItripHotelTempStoreServiceImpl implements ItripHotelTempStoreServic
         return page;
     }
 
+    /**
+     * 根据roomId和入离时间查询剩余库存
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public List<ItripHotelTempStore> getItripHotelTempStoresByMap(Map<String, Object> param) throws Exception {
+        //1.刷新实时库存表
+        itripHotelTempStoreMapper.flushRoomTempStore(param);
+        //2.计算剩余库存
+        List<ItripHotelTempStore> stores = itripHotelTempStoreMapper.getItripHotelTempStoresByMap(param);
+        return stores;
+    }
+
 }

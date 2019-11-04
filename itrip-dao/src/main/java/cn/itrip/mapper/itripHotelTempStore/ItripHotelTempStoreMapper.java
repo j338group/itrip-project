@@ -18,4 +18,11 @@ public interface ItripHotelTempStoreMapper {
 
 	public Integer deleteItripHotelTempStoreById(@Param(value = "id") Long id)throws Exception;
 
+	/**
+	 * 刷新实时库存表
+	 * @param param
+	 */
+    void flushRoomTempStore(Map<String, Object> param) throws Exception;
+
+	List<ItripHotelTempStore> getItripHotelTempStoresByMap(Map<String, Object> param)throws Exception;
 }

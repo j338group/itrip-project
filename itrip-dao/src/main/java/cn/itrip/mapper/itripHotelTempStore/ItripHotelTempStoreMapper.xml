@@ -157,4 +157,47 @@
     <delete id="deleteItripHotelTempStoreById" parameterType="Long">
         delete from itrip_hotel_temp_store where id = #{id}
     </delete>
+
+
+    <update id="flushRoomTempStore" parameterType="Map" statementType="CALLABLE">
+         {
+           call pre_flush_store(
+                #{startTime,jdbcType=DATE,mode=IN},
+                #{endTime,jdbcType=DATE,mode=IN},
+                #{roomId,jdbcType=BIGINT,mode=IN},
+                #{hotelId,jdbcType=BIGINT,mode=IN}
+               )
+        }
+
+    </update>
+
+    <select id="getItripHotelTempStoresByMap" parameterType="Map" resultType="cn.itrip.beans.pojo.ItripHotelTempStore">
+        SELECT
+	      t.roomId,t.recordDate,t.store-(
+                                    CASE
+                                    WHEN SUM(o.`count`)IS NULL
+                                    THEN 0
+                                    ELSE
+                                    SUM(o.`count`)
+                                    END
+                                  ) store
+        FROM
+            itrip_hotel_temp_store t
+        LEFT JOIN
+            itrip_hotel_order o  ON t.`roomId`=o.`roomId` AND o.`orderStatus`=0
+            AND t.`recordDate`
+            BETWEEN DATE_FORMAT(o.checkInDate,'%Y-%m-%d')
+            AND DATE_FORMAT(o.checkOutDate,'%Y-%m-%d')
+
+        WHERE
+            t.roomId=#{roomId}
+            AND
+            t.`recordDate`
+            BETWEEN DATE_FORMAT(#{startTime},'%Y-%m-%d')
+            AND DATE_FORMAT(#{endTime},'%Y-%m-%d')
+
+        GROUP BY t.roomId,t.recordDate
+        order by t.store asc ;
+
+    </select>
 </mapper>
