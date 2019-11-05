@@ -77,14 +77,15 @@ public class TokenServiceImpl implements TokenService {
     @Override
     public Boolean validate(String token, String agent) throws Exception {
 //        String userJson = redisAPI.get(token);
+        //验证是否同一个客户端
+        if (!MD5.getMd5(agent,6).equals(token.split("-")[4])) {
+            throw new Exception("不是同一个客户端,未登录");
+        }
+        //验证是否token失效
         if (!redisAPI.exist(token)) {
-            throw new Exception("未登录");
+            throw new Exception("token失效，未登录");
         }
-        //验证通过
-        if (MD5.getMd5(agent,6).equals(token.split("-")[4])) {
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**

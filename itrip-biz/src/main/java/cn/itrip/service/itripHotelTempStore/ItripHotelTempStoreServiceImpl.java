@@ -68,4 +68,16 @@ public class ItripHotelTempStoreServiceImpl implements ItripHotelTempStoreServic
         return stores;
     }
 
+    /**
+     * 验证库存是否充足
+     * @param param
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Boolean validateTempStore(Map<String, Object> param) throws Exception {
+        List<ItripHotelTempStore> list = this.getItripHotelTempStoresByMap(param);
+        return list.get(0).getStore()>=(Integer) param.get("count");
+    }
+
 }

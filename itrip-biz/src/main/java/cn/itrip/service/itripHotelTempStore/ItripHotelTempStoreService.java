@@ -30,4 +30,6 @@ public interface ItripHotelTempStoreService {
      * @throws Exception
      */
     List<ItripHotelTempStore> getItripHotelTempStoresByMap(Map<String, Object> param) throws Exception;
+
+    Boolean validateTempStore(Map<String, Object> param) throws Exception;
 }

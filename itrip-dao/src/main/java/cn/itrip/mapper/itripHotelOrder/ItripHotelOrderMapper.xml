@@ -244,7 +244,7 @@
         </trim>
     </select>
 
-    <insert id="insertItripHotelOrder" parameterType="cn.itrip.beans.pojo.ItripHotelOrder">
+    <insert id="insertItripHotelOrder" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="cn.itrip.beans.pojo.ItripHotelOrder">
         insert into itrip_hotel_order(
                         userId,
                         orderType,
@@ -334,10 +334,10 @@
                     <if test="bookingDays != null and bookingDays!=''">
                         bookingDays=#{bookingDays},
                     </if>
-                    <if test="checkInDate != null and checkInDate!=''">
+                    <if test="checkInDate != null">
                         checkInDate=#{checkInDate},
                     </if>
-                    <if test="checkOutDate != null and checkOutDate!=''">
+                    <if test="checkOutDate != null">
                         checkOutDate=#{checkOutDate},
                     </if>
                     <if test="orderStatus != null and orderStatus!=''">
@@ -373,13 +373,13 @@
                     <if test="bookType != null and bookType!=''">
                         bookType=#{bookType},
                     </if>
-                    <if test="creationDate != null and creationDate!=''">
+                    <if test="creationDate != null">
                         creationDate=#{creationDate},
                     </if>
                     <if test="createdBy != null and createdBy!=''">
                         createdBy=#{createdBy},
                     </if>
-                    <if test="modifyDate != null and modifyDate!=''">
+                    <if test="modifyDate != null">
                         modifyDate=#{modifyDate},
                     </if>
                     <if test="modifiedBy != null and modifiedBy!=''">

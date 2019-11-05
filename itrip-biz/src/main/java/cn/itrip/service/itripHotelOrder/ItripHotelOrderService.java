@@ -1,8 +1,11 @@
 package cn.itrip.service.itripHotelOrder;
 import cn.itrip.beans.pojo.ItripHotelOrder;
+
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import cn.itrip.beans.pojo.ItripUserLinkUser;
 import cn.itrip.common.Page;
 /**
 * Created by shang-pc on 2015/11/7.
@@ -22,4 +25,8 @@ public interface ItripHotelOrderService {
     public Integer itriptxDeleteItripHotelOrderById(Long id)throws Exception;
 
     public Page<ItripHotelOrder> queryItripHotelOrderPageByMap(Map<String,Object> param,Integer pageNo,Integer pageSize)throws Exception;
+
+    BigDecimal getPayAmount(Integer count, int bookingDays, Double roomPrice) throws Exception;
+
+    Long itriptxAddItripHotelOrder(ItripHotelOrder order, List<ItripUserLinkUser> linkUser) throws Exception;
 }
