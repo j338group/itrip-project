@@ -3,6 +3,7 @@ package cn.itrip.controller;
 import cn.itrip.beans.dto.Dto;
 import cn.itrip.beans.pojo.*;
 import cn.itrip.beans.vo.order.ItripAddHotelOrderVO;
+import cn.itrip.beans.vo.order.ItripModifyHotelOrderVO;
 import cn.itrip.beans.vo.order.RoomStoreVO;
 import cn.itrip.beans.vo.order.ValidateRoomStoreVO;
 import cn.itrip.common.*;
@@ -11,6 +12,7 @@ import cn.itrip.service.itripHotelOrder.ItripHotelOrderService;
 import cn.itrip.service.itripHotelRoom.ItripHotelRoomService;
 import cn.itrip.service.itripHotelTempStore.ItripHotelTempStoreService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -232,4 +234,43 @@ public class ItripHotelOrderController {
             return  DtoUtil.returnFail("生成订单失败","100505");
         }
     }
+    @RequestMapping(value = "/updateorderstatusandpaytype",method = RequestMethod.POST)
+    public Dto updateOrderStatusAndPaytype(@RequestBody ItripModifyHotelOrderVO orderVO,HttpServletRequest request){
+        //验证登录
+        String token = request.getHeader("token");
+        ItripUser currentUser = validationToken.getCurrentUser(token);
+        if (currentUser == null) {
+            return DtoUtil.returnFail("token失效，请重登录", "100000");
+        }
+        //验证参数
+        if (orderVO == null||orderVO.getId()==null||orderVO.getPayType()==null) {
+            return DtoUtil.returnFail("不能提交空数据", "100523");
+        }
+        //验证支付类型是否支持
+        ItripHotelOrder hotelOrder=null;
+        try {
+            hotelOrder = itripHotelOrderService.getItripHotelOrderById(orderVO.getId());
+            Boolean isSupport=itripHotelOrderService.getSupportPayType(hotelOrder,orderVO.getPayType());
+            if(!isSupport){
+                return DtoUtil.returnFail("不支持的支付方式", "100521");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //修改订单
+
+        try {
+            itripHotelOrderService.itriptxModifyItripHotelOrderAndTempRoomStore(hotelOrder,orderVO.getPayType());
+            return DtoUtil.returnSuccess("修改订单状态成功！");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return DtoUtil.returnFail("修改订单失败", "100522");
+        }
+
+    }
+//    @Scheduled(cron="0 0/10 * ? * ?")
+//    public void testTask(){
+//        System.out.println("执行任务中。。。。");
+//    }
+
 }

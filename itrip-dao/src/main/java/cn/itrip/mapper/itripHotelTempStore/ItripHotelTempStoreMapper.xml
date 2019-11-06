@@ -200,4 +200,17 @@
         order by t.store asc ;
 
     </select>
+
+    <update id="updateTempStore" parameterType="Map">
+        UPDATE itrip_hotel_temp_store
+        SET store=store-#{count}
+        WHERE
+            roomId=#{roomId}
+            AND
+            recordDate
+            BETWEEN
+                        DATE_FORMAT(#{checkInDate},'%y-%m-%d')
+                        AND
+                        DATE_FORMAT(#{checkOutDate},'%y-%m-%d');
+    </update>
 </mapper>

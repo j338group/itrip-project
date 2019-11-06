@@ -18,4 +18,5 @@ public interface ItripHotelOrderMapper {
 
 	public Integer deleteItripHotelOrderById(@Param(value = "id") Long id)throws Exception;
 
+    void updateOrderStatus() throws Exception;
 }

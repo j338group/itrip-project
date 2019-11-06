@@ -29,4 +29,9 @@ public interface ItripHotelOrderService {
     BigDecimal getPayAmount(Integer count, int bookingDays, Double roomPrice) throws Exception;
 
     Long itriptxAddItripHotelOrder(ItripHotelOrder order, List<ItripUserLinkUser> linkUser) throws Exception;
+
+    Boolean getSupportPayType(ItripHotelOrder hotelOrder, Integer payType) throws Exception;
+
+    void itriptxModifyItripHotelOrderAndTempRoomStore(ItripHotelOrder hotelOrder, Integer payType) throws Exception;
+
 }

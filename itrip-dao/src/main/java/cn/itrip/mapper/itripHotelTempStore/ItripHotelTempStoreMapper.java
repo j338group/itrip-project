@@ -25,4 +25,6 @@ public interface ItripHotelTempStoreMapper {
     void flushRoomTempStore(Map<String, Object> param) throws Exception;
 
 	List<ItripHotelTempStore> getItripHotelTempStoresByMap(Map<String, Object> param)throws Exception;
+
+    void updateTempStore(Map<String, Object> param) throws Exception;
 }

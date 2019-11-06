@@ -15,7 +15,10 @@
     <context:component-scan base-package="cn.itrip.controller"/>
     <mvc:annotation-driven/>
 
-    <task:annotation-driven/>
+    <task:annotation-driven/><!--定时任务注解驱动-->
+    <context:component-scan base-package="cn.itrip.service"/><!--定时任务（修改超时未支付订单）在service层-->
+
+
 
     <!-- 配置文件上传  MultipartResolver-->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
