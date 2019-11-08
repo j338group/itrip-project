@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/qrcode.min.js" type="text/javascript"></script>
+</head>
+<body>
+<input id="orderNo" value="" /><input type="button" value="微信支付" onclick="payOrder()" />
+<div id="qrcode"></div>
+<script>
+    var orderNo;
+    var queryOrderStatusInterval;
+    function payOrder() {
+        orderNo = $("#orderNo").val();
+        $.ajax({
+            url: "api/wxpay/createqccode/"+orderNo,
+            method: "get",
+            success: function (data) {
+                new QRCode(document.getElementById('qrcode'), data.data.codeUrl);
+            }
+        });
+        queryOrderStatusInterval = setInterval(queryOrder, 10000);
+    }
+    function queryOrder() {
+        $.ajax({
+            url: "api/wxpay/queryorderstatus/"+orderNo,
+            method: "get",
+            success: function (result) {
+                if (result.success == 'true') {
+                    var tradeNo = result.data.tradeNo;
+                    var orderStatus = result.data.orderStatus;
+                    if (tradeNo != null && tradeNo != "")
+                        if (orderStatus == 2) {
+                            window.location.href = "success.jsp";
+                        }
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>
