@@ -30,7 +30,7 @@ public class ItripAddCommentVO {
     @ApiModelProperty("[必填] 卫生评分")
     private Integer hygieneScore;
     @ApiModelProperty("[必填，注：接收数字类型] 出游类型（数据取自下拉列表）")
-    private String tripMode;
+    private Long tripMode;
     @ApiModelProperty("[必填，注：接收数字类型] 是否满意（0：有待改善 1：值得推荐）")
     private Integer isOk;
     @ApiModelProperty("[非必填] 评论内容")
@@ -118,11 +118,11 @@ public class ItripAddCommentVO {
         this.hygieneScore = hygieneScore;
     }
 
-    public String getTripMode() {
+    public Long getTripMode() {
         return tripMode;
     }
 
-    public void setTripMode(String tripMode) {
+    public void setTripMode(Long tripMode) {
         this.tripMode = tripMode;
     }
 

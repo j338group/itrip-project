@@ -137,7 +137,7 @@ public class ItripHotelOrderServiceImpl implements ItripHotelOrderService {
 
     }
 
-    @Scheduled(cron = "0/5 * * * * ?")
+    @Scheduled(cron = "0 0/10 * * * ?")
     public void updateOrderStatusTimeOutPay(){
         //扫描订单表，（未支付的）查看订单生成时间跟当前时间的差，是否大于2小时
         //如果大于2小时，修改订单状态

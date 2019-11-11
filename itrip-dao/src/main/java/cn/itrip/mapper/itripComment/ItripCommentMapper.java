@@ -1,5 +1,6 @@
 package cn.itrip.mapper.itripComment;
 import cn.itrip.beans.pojo.ItripComment;
+import cn.itrip.beans.vo.comment.ItripListCommentVO;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.Map;
@@ -18,4 +19,11 @@ public interface ItripCommentMapper {
 
 	public Integer deleteItripCommentById(@Param(value = "id") Long id)throws Exception;
 
+	/**
+	 * 查询评论详情列表
+	 * @param param
+	 * @return
+	 * @throws Exception
+	 */
+	List<ItripListCommentVO> getItripCommentListWithDetailByMap(Map<String, Object> param)throws Exception;
 }

@@ -1,5 +1,7 @@
 package cn.itrip.beans.vo.comment;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -10,6 +12,7 @@ public class ItripListCommentVO{
 	private Long id;//评论id
 	private String userCode;  //发表评论的用户的姓名
 	private Integer hotelLevel;  //酒店的星级
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date checkInDate;  //入住时间
 	private String roomTitle;  //房型名称
 	private String tripModeName;//出游类型中文名称

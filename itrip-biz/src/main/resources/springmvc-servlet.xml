@@ -26,7 +26,7 @@
         <property name="maxUploadSize" value="5242880"></property>  
         <property name="maxInMemorySize" value="40960"></property> 
         <property name="resolveLazily" value="true"></property> 
-   </bean>  
+    </bean>
    
    <context:property-placeholder location="classpath:systemConfig.properties" />
    <bean name="systemConfig" class="cn.itrip.common.SystemConfig">  
