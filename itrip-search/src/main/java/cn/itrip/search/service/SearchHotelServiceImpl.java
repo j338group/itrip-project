@@ -2,6 +2,7 @@ package cn.itrip.search.service;
 
 import cn.itrip.beans.vo.hotel.ItripHotelVO;
 import cn.itrip.beans.vo.hotel.SearchHotelVO;
+import cn.itrip.common.EmptyUtils;
 import cn.itrip.common.Page;
 import cn.itrip.search.dao.BaseQuery;
 import org.apache.solr.client.solrj.SolrQuery;
@@ -30,7 +31,7 @@ public class SearchHotelServiceImpl implements SearchHotelService {
         StringBuffer sb = new StringBuffer();
         sb.append("destination:" + hotelVO.getDestination());
         String keywords = hotelVO.getKeywords();
-        if(keywords !=null){
+        if(EmptyUtils.isNotEmpty(keywords)){
             sb.append(" AND keyword:" + keywords.replace(" ", "|"));
         }
         logger.debug("-------------全文检索条件-------{}",sb);
@@ -38,18 +39,18 @@ public class SearchHotelServiceImpl implements SearchHotelService {
         //封装价格条件
         //150-300
         Double minPrice = hotelVO.getMinPrice();
-        if(minPrice !=null){
+        if(EmptyUtils.isNotEmpty(minPrice)){
             query.addFilterQuery("maxPrice:["+ minPrice +" TO *]");
         }
         Double maxPrice = hotelVO.getMaxPrice();
-        if(maxPrice !=null){
+        if(EmptyUtils.isNotEmpty(maxPrice)){
             query.addFilterQuery("minPrice:[* TO "+maxPrice+"]");
         }
         //封装商圈条件
         //前端过来的格式 3665,3620
         //tradingAreaIds:(*,3665,* OR *,3619,*)
         String areaIds = hotelVO.getTradeAreaIds();
-        if(areaIds!=null){
+        if(EmptyUtils.isNotEmpty(areaIds)){
             StringBuffer sb1 = new StringBuffer();
             sb1.append("tradingAreaIds:(");
             String[] ids = areaIds.split(",");
@@ -66,13 +67,13 @@ public class SearchHotelServiceImpl implements SearchHotelService {
         }
         //星级条件
         Integer hotelLevel = hotelVO.getHotelLevel();
-        if(hotelLevel !=null){
+        if(EmptyUtils.isNotEmpty(hotelLevel)){
             query.addFilterQuery("hotelLevel:" + hotelLevel);
         }
         //酒店特色
         //前端数据格式 ：17,116,117
         String featureIds = hotelVO.getFeatureIds();
-        if(featureIds!=null){
+        if(EmptyUtils.isNotEmpty(featureIds)){
             StringBuffer sb1 = new StringBuffer();
             sb1.append("featureIds:(");
             String[] ids = featureIds.split(",");
@@ -89,11 +90,11 @@ public class SearchHotelServiceImpl implements SearchHotelService {
         }
         //排序,前端数据：排序的字段
         String ascSort = hotelVO.getAscSort();
-        if(ascSort!=null){
+        if(EmptyUtils.isNotEmpty(ascSort)){
             query.setSort(ascSort, SolrQuery.ORDER.asc);
         }
         String descSort = hotelVO.getDescSort();
-        if(descSort!=null){
+        if(EmptyUtils.isNotEmpty(descSort)){
             query.setSort(descSort, SolrQuery.ORDER.desc);
         }
         //调用dao层代码进行查询

@@ -93,8 +93,14 @@ public class ItripHotelRoomController {
         }
         try {
             List<ItripHotelRoomVO> roomVOList= itripHotelRoomService.getItripHotelRoomListBySearchRoomVO(roomVO);
-
-            return DtoUtil.returnDataSuccess(roomVOList);
+            //以下格式配合前端的需求????????
+            List<List<ItripHotelRoomVO>> list = new ArrayList<>();
+            for (ItripHotelRoomVO hotelRoomVO : roomVOList) {
+                List<ItripHotelRoomVO> tempList = new ArrayList<>();
+                tempList.add(hotelRoomVO);
+                list.add(tempList);
+            }
+            return DtoUtil.returnDataSuccess(list);
         } catch (Exception e) {
             e.printStackTrace();
             return DtoUtil.returnFail("查询房型列表失败", "100304");

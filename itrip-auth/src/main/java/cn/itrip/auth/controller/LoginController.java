@@ -50,7 +50,7 @@ public class LoginController {
                 //缓存token
                 tokenService.save(token, user);
                 //发送token到前端
-                long expTime = tokenService.TOKEN_EXPIRE * 60 * 60 * 1000;
+                long expTime = new Date().getTime()+tokenService.TOKEN_EXPIRE * 60 * 60 * 1000;
                 long genTime = new Date().getTime();
                 return DtoUtil.returnDataSuccess(new ItripTokenVO(token, expTime, genTime));
             } else {

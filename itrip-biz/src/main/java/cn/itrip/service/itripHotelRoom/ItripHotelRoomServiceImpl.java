@@ -9,6 +9,7 @@ import cn.itrip.common.Page;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.*;
 
 import cn.itrip.common.Constants;
@@ -79,6 +80,7 @@ public class ItripHotelRoomServiceImpl implements ItripHotelRoomService {
         for (ItripHotelRoom room : roomList) {
             ItripHotelRoomVO roomVO1 = new ItripHotelRoomVO();
             BeanUtils.copyProperties(room, roomVO1);
+            roomVO1.setRoomPrice(BigDecimal.valueOf(room.getRoomPrice()));
             roomVOList.add(roomVO1);
         }
         return roomVOList;
